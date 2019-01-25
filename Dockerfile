@@ -24,6 +24,7 @@ RUN mkdir -p /usr/lib/jvm && cd /usr/lib/jvm/ \
   && cd /
 ENV JAVA_HOME /usr/lib/jvm/jdk1.8.0_202
 ENV PATH ${PATH}:/usr/lib/jvm/jdk1.8.0_202/bin
+RUN echo "PATH=\"${PATH}\"" > /etc/environment && echo "JAVA_HOME=${JAVA_HOME}" >> /etc/environment
 
 # install maven
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
