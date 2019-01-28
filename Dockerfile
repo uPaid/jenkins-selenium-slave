@@ -13,7 +13,14 @@ ENV MAVEN_CONFIG "$JENKINS_HOME/.m2"
 
 # install necessary packages
 RUN apt-get update -qy \
-  && apt-get -qy install curl gnupg openssh-server git xvfb
+  && apt-get -qy install locales locales-all curl gnupg openssh-server git xvfb
+
+# install locales
+RUN sed -i -e 's/# pl_PL.UTF-8 UTF-8/pl_PL.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG pl_PL.UTF-8
+ENV LANGUAGE pl_PL:pl
+ENV LC_ALL pl_PL.UTF-8
 
 # install java
 RUN mkdir -p /usr/lib/jvm && cd /usr/lib/jvm/ \
